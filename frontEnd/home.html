@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/menu.css">
+    <link rel="stylesheet" href="./css/home.css">
+</head>
+<body>
+
+     <!-- Fixed menubar -->
+     <div class="menubar">
+        <span class="menu-toggle" onclick="toggleSidebar()">☰ Menu</span>
+        <h2><a href="home.html">SINTUF-MT</a></h2>
+    </div>
+
+     <!-- Sidebar -->
+     <div class="sidebar" id="sidebar">
+        <ul class="menu-list">
+            <li><i></i><a href="/sindicalista.html">Cadastro de Sindicalista</a></li>
+            <li><i></i><a href="/pessoa.html">Cadastro de Pessoa</a></li>
+            <li><i></i><a href="/cargo.html">Cadastro de Cargo</a></li>
+            <li><i></i><a href="/lotacao.html">Cadastro de Lotação</a></li>
+            <li><i></i><a href="/formacao.html">Cadastro de Formação</a></li>
+            <li><i></i><a href="/cidade.html">Cadastro de Cidade</a></li>
+            <li><i></i><a href="/estado.html">Cadastro de Estado</a></li>
+            <li><i></i><a href="/pais.html">Cadastro de País</a></li>
+        </ul>
+    </div>
+
+    <!-- Overlay -->
+    <!-- <div class="overlay" id="overlay" onclick="closeSidebar()"></div> -->
+
+    <!-- Main content -->
+    <div class="content" id="overlay" onclick="closeSidebar()">
+
+        <!-- <h2>Welcome to the site</h2>
+        <p>This is the main content area.</p> -->
+    </div>
+
+    <script src="./scripts/sidebar.js" type="module"></script>
+</body>
+</html>
