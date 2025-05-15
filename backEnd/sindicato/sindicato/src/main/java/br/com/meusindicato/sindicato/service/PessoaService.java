@@ -28,7 +28,7 @@ public class PessoaService {
 
     public List<PaisDTO> listaPaises() {
 
-        List<Pais> paisList = paisRepository.findAll();
+        List<Pais> paisList = paisRepository.findByOrderByNomePais();
 
         return paisList.stream()
                 .map(p -> new PaisDTO(p.getPaisId(),p.getNomePais(),p.getSiglaPais()))

@@ -51,11 +51,13 @@ async function carregarPaises() {
         if (response.ok) {
             const paises = await response.json();
             const selectPais = document.getElementById('pais');
+            const selectPaisNatural = document.getElementById('paisNatural');
             paises.forEach(pais => {
                 const option = document.createElement('option');
-                option.value = pais.paisId; // Supondo que o backend retorna um ID para cada país
+                option.value = pais.paisId; 
                 option.textContent = pais.nome;
                 selectPais.appendChild(option);
+                selectPaisNatural.appendChild(option.cloneNode(true));
             });
         } else {
             console.error('Erro ao carregar os países:', await response.text());
@@ -68,6 +70,7 @@ async function carregarPaises() {
 // Função para carregar os estados com base no país selecionado
 async function carregarEstados(paisId) {
     try {
+         console.log('Carregando estados para o país:'+ paisId);
         const response = await fetch(`${baseURL}/estado/${paisId}`);
         if (response.ok) {
             const estados = await response.json();
@@ -109,7 +112,7 @@ async function carregarCidades(estadoId) {
     }
 }
 
-// Capturar o evento de mudança do combo box de País
+
 document.getElementById('pais').addEventListener('change', (event) => {
     const paisId = event.target.value;
 
@@ -122,13 +125,76 @@ document.getElementById('pais').addEventListener('change', (event) => {
     carregarEstados(paisId);
 });
 
-// Capturar o evento de mudança do combo box de Estado
+
 document.getElementById('estado').addEventListener('change', (event) => {
     const estadoId = event.target.value;
 
     const selectCidade = document.getElementById('cidadeAtual');
     selectCidade.innerHTML = '<option value="">Selecione uma cidade</option>';
     carregarCidades(estadoId);
+});
+
+// Função para carregar os estados com base no país selecionado
+async function carregarEstadosNaturais(paisId) {
+    try {
+        const response = await fetch(`${baseURL}/estado/${paisId}`);
+        if (response.ok) {
+            const estados = await response.json();
+            const selectEstadoNatural = document.getElementById('estadoNatural');
+            selectEstadoNatural.innerHTML = '<option value="">Selecione um estado</option>'; // Limpa opções anteriores
+            estados.forEach(estado => {
+                const option = document.createElement('option');
+                option.value = estado.estadoId;
+                option.textContent = estado.estadoNome;
+                selectEstadoNatural.appendChild(option);
+            });
+        } else {
+            console.error('Erro ao carregar os estados:', await response.text());
+        }
+    } catch (error) {
+        console.error('Erro ao conectar ao servidor:', error);
+    }
+}
+
+async function carregarCidadesNaturais(estadoId) {
+    try {
+        const response = await fetch(`${baseURL}/cidade/${estadoId}`);
+        if (response.ok) {
+            const cidades = await response.json();
+            const selectCidadeNatural = document.getElementById('cidadeNatural');
+            selectCidadeNatural.innerHTML = '<option value="">Selecione uma cidade</option>'; // Limpa opções anteriores
+            cidades.forEach(cidade => {
+                const option = document.createElement('option');
+                option.value = cidade.cidadeId;
+                option.textContent = cidade.cidadeNome;
+                selectCidadeNatural.appendChild(option);
+            });
+        } else {
+            console.error('Erro ao carregar as cidades:', await response.text());
+        }
+    } catch (error) {
+        console.error('Erro ao conectar ao servidor:', error);
+    }
+}
+
+document.getElementById('paisNatural').addEventListener('change', (event) => {
+    const paisId = event.target.value;
+
+    const selectEstado = document.getElementById('estadoNatural');
+    selectEstado.innerHTML = '<option value="">Selecione um estado</option>';
+
+    const selectCidade = document.getElementById('cidadeNatural');
+    selectCidade.innerHTML = '<option value="">Selecione uma cidade</option>';
+
+    carregarEstadosNaturais(paisId);
+});
+
+document.getElementById('estadoNatural').addEventListener('change', (event) => {
+    const estadoId = event.target.value;
+
+    const selectCidade = document.getElementById('cidadeNatural');
+    selectCidade.innerHTML = '<option value="">Selecione uma cidade</option>';
+    carregarCidadesNaturais(estadoId);
 });
 
 // Capturar o evento de envio do formulário
@@ -188,3 +254,5 @@ form.addEventListener('submit', async (event) => {
 document.addEventListener('DOMContentLoaded', carregarPaises);
 document.addEventListener('DOMContentLoaded', carregarEstados);
 document.addEventListener('DOMContentLoaded', carregarCidades);
+document.addEventListener('DOMContentLoaded', carregarNiveis);
+document.addEventListener('DOMContentLoaded', carregarClasses);

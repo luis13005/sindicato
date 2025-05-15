@@ -36,7 +36,7 @@ public class EstadoService {
     }
 
     public List<PaisDTO> pegarPaises() {
-    return convertePais(paisRepository.findAll());
+    return convertePais(paisRepository.findByOrderByNomePais());
     }
 
     public List<PaisDTO> convertePais(List<Pais> paisList){

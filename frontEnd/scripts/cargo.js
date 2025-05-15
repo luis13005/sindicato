@@ -9,7 +9,7 @@ form.addEventListener('submit', async (event) => {
     const cargoCodigo = document.getElementById('codigo').value;
 
 
-    console.log(descricao, nivel, classe, padrao);
+    console.log(cargoCodigo,cargoDescricao);
     if (!cargoDescricao || !cargoCodigo ) {
         alert('Preencha todos os campos!');
         return;
@@ -19,7 +19,8 @@ form.addEventListener('submit', async (event) => {
         cargoCodigo: cargoCodigo,
         cargoDescricao: cargoDescricao
     };
-
+    console.log(data);
+    console.log('URL: ', `${baseURL}/cargo`);
     try {
         const response = await fetch(`${baseURL}/cargo`, {
             method: 'POST',
@@ -41,7 +42,3 @@ form.addEventListener('submit', async (event) => {
         alert('Erro ao conectar ao servidor.');
     }
 });
-
-// Carregar os estados ao carregar a página
-document.addEventListener('DOMContentLoaded', carregarNiveis);
-document.addEventListener('DOMContentLoaded',carregarClasses);

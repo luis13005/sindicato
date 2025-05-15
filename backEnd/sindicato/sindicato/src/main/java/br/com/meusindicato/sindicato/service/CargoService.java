@@ -15,7 +15,8 @@ public class CargoService {
     private CargoRepository cargoRepository;
 
     public ResponseEntity<Boolean> cadastrarCargo(CargoDTO cargoDTO) {
-
+        System.out.println(cargoDTO.cargoCodigo());
+        System.out.println(cargoDTO.cargoDescricao());
         Cargo cargo = new Cargo(cargoDTO.cargoCodigo(),cargoDTO.cargoDescricao());
 
         cargoRepository.save(cargo);
