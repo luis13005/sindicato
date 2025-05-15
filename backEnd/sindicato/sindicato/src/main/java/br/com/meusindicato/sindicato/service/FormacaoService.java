@@ -15,7 +15,7 @@ public class FormacaoService {
     FormacaoRepository formacaoRepository;
 
     public ResponseEntity<Boolean> cadastraFormacao(FormacaoDTO formacaoDTO) {
-        Formacao formacao = new Formacao(formacaoDTO.codigoFormacao(),formacaoDTO.nomeFormacao());
+        Formacao formacao = new Formacao(formacaoDTO.formacaoCodigo(),formacaoDTO.nomeFormacao());
 
         formacaoRepository.save(formacao);
         return new ResponseEntity<>(true,HttpStatus.OK);

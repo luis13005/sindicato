@@ -12,6 +12,10 @@ public enum EstadoCivil {
         this.estadoCivil = estadoCivil;
     }
 
+    public String getEstadoCivil() {
+        return estadoCivil;
+    }
+
     public static EstadoCivil fromString(String texto){
         for (EstadoCivil estadoCivil:EstadoCivil.values()){
             if (estadoCivil.estadoCivil.equalsIgnoreCase(texto)){

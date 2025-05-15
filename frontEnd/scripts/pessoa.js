@@ -197,6 +197,66 @@ document.getElementById('estadoNatural').addEventListener('change', (event) => {
     carregarCidadesNaturais(estadoId);
 });
 
+async function carregarEstadoCivil() {
+    try {
+        const response = await fetch(`${baseURL}/estadocivil`);
+        if (response.ok) {
+            const estadosCivis = await response.json();
+            const selectEstadoCivil = document.getElementById('estadoCivil');
+            estadosCivis.forEach(estadoCivil => {
+                const option = document.createElement('option');
+                option.value = estadoCivil.estadoCivil; // Supondo que o backend retorna um ID
+                option.textContent = estadoCivil.estadoCivil; // Supondo que o backend retorna um nome
+                selectEstadoCivil.appendChild(option);
+            });
+        } else {
+            console.error('Erro ao carregar os estados civis:', await response.text());
+        }
+    } catch (error) {
+        console.error('Erro ao conectar ao servidor:', error);
+    }
+}
+
+async function carregarFormacoes() {
+    try{
+        const response = await fetch(`${baseURL}/formacao`);
+        if (response.ok) {
+            const formacoes = await response.json();
+            const selectFormacao = document.getElementById('formacaoId');
+            formacoes.forEach(formacao => {
+                const option = document.createElement('option');
+                option.value = formacao.formacaoCodigo; // Supondo que o backend retorna um ID
+                option.textContent = formacao.formacaoCodigo+'-'+formacao.nomeFormacao; // Supondo que o backend retorna um nome
+                selectFormacao.appendChild(option);
+            });
+        } else {
+            console.error('Erro ao carregar as formações:', await response.text());
+        }
+    } catch (error) {
+        console.error('Erro ao conectar ao servidor:', error);
+    }
+}
+
+async function carregarLotacoes(){
+    try{
+        const response = await fetch(`${baseURL}/lotacao`);
+        if (response.ok) {
+            const lotacoes = await response.json();
+            const selectLotacao = document.getElementById('lotacao');
+            lotacoes.forEach(lotacao => {
+                const option = document.createElement('option');
+                option.value = lotacao.lotacaoId; // Supondo que o backend retorna um ID
+                option.textContent = lotacao.lotacaoDescricao; // Supondo que o backend retorna um nome
+                selectLotacao.appendChild(option);
+            });
+        } else {
+            console.error('Erro ao carregar as lotações:', await response.text());
+        }
+    } catch (error) {
+        console.error('Erro ao conectar ao servidor:', error);
+    }
+}
+
 // Capturar o evento de envio do formulário
 const form = document.getElementById('form-pessoa');
 form.addEventListener('submit', async (event) => {
@@ -256,3 +316,6 @@ document.addEventListener('DOMContentLoaded', carregarEstados);
 document.addEventListener('DOMContentLoaded', carregarCidades);
 document.addEventListener('DOMContentLoaded', carregarNiveis);
 document.addEventListener('DOMContentLoaded', carregarClasses);
+document.addEventListener('DOMContentLoaded', carregarEstadoCivil);
+document.addEventListener('DOMContentLoaded', carregarFormacoes);
+document.addEventListener('DOMContentLoaded', carregarLotacoes);

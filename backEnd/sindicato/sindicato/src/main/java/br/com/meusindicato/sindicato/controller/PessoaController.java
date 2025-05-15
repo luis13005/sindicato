@@ -2,6 +2,7 @@ package br.com.meusindicato.sindicato.controller;
 
 import br.com.meusindicato.sindicato.dto.*;
 import br.com.meusindicato.sindicato.model.CargoClasse;
+import br.com.meusindicato.sindicato.model.EstadoCivil;
 import br.com.meusindicato.sindicato.model.Nivel;
 import br.com.meusindicato.sindicato.service.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,13 @@ public class PessoaController {
                 .collect(Collectors.toList());
     }
 
+    @GetMapping("/estadocivil")
+    public List<EstadoCivilDTO> buscaEstadoCivil(){
+
+        return Arrays.stream(EstadoCivil.values()).map(e -> new EstadoCivilDTO(e.getEstadoCivil()))
+                .collect(Collectors.toList());
+    }
+
     @GetMapping("/pais")
     public List<PaisDTO> listaPaises(){
 
@@ -49,5 +57,15 @@ public class PessoaController {
     @GetMapping("cidade/{estadoId}")
     public List<CidadeDTO> listaCidades(@PathVariable Long estadoId){
         return pessoaService.listaCidades(estadoId);
+    }
+
+    @GetMapping("/formacao")
+    public List<FormacaoDTO> buscaFormacoes(){
+        return pessoaService.listaFormacoes();
+    }
+
+    @GetMapping("/lotacao")
+    public List<LotacaoDTO> listaLotacoes(){
+       return pessoaService.listaLotacoes();
     }
 }

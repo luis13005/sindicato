@@ -15,7 +15,7 @@ public class Formacao {
     private String nomeFormacao;
 
     @Column(name = "formacaoCodigo",unique = true)
-    private Integer codigoFormacao;
+    private Integer formacaoCodigo;
 
     @OneToMany(mappedBy = "formacao",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<Pessoa> formacaoPessoas;
@@ -24,7 +24,39 @@ public class Formacao {
 
     public Formacao(Integer codigoFormacao,String nomeFormacao) {
         this.nomeFormacao = nomeFormacao;
-        this.codigoFormacao = codigoFormacao;
+        this.formacaoCodigo = codigoFormacao;
+    }
+
+    public Long getFormacaoId() {
+        return formacaoId;
+    }
+
+    public void setFormacaoId(Long formacaoId) {
+        this.formacaoId = formacaoId;
+    }
+
+    public String getNomeFormacao() {
+        return nomeFormacao;
+    }
+
+    public void setNomeFormacao(String nomeFormacao) {
+        this.nomeFormacao = nomeFormacao;
+    }
+
+    public Integer getFormacaoCodigo() {
+        return formacaoCodigo;
+    }
+
+    public void setFormacaoCodigo(Integer formacaoCodigo) {
+        this.formacaoCodigo = formacaoCodigo;
+    }
+
+    public List<Pessoa> getFormacaoPessoas() {
+        return formacaoPessoas;
+    }
+
+    public void setFormacaoPessoas(List<Pessoa> formacaoPessoas) {
+        this.formacaoPessoas = formacaoPessoas;
     }
 
     @Override
@@ -32,7 +64,7 @@ public class Formacao {
         return "Formacao{" +
                 "formacaoId=" + formacaoId +
                 ", nomeFormacao='" + nomeFormacao + '\'' +
-                ", codigoFormacao=" + codigoFormacao +
+                ", codigoFormacao=" + formacaoCodigo +
                 ", formacaoPessoas=" + formacaoPessoas +
                 '}';
     }

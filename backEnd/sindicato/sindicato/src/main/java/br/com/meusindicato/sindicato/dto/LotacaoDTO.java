@@ -7,6 +7,5 @@ import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record LotacaoDTO(Long lotacaoId,
-                        String lotacaoDescricao,
-                        List<Pessoa> pessoa) {
+                        String lotacaoDescricao) {
 }
